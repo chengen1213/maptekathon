@@ -16,9 +16,9 @@ Firstname Lastname (email@adelaide.edu.au)
 
 ### Description of System
 
-* Competition-style online [hackathon[(https://en.wikipedia.org/wiki/Hackathon), focused on large data sets, with deadline for contest completion
+* Competition-style online [hackathon](https://en.wikipedia.org/wiki/Hackathon), focused on large data sets, with deadline for contest completion
 * Similar to [Web Submission System](https://cs.adelaide.edu.au/services/websubmission/) of the School of Computer Science or [Zealy](https://zealy.io/) (formerly known as Automark), but with leaderboard
-* See also [CodingBat](https://codingbat.com/java), [TopCoder](https://www.topcoder.com/) or [Kaggle](https://www.kaggle.com/competitions), and [this challenge](https://dysdoc.github.io/docgen2/index.html) for inspiration
+* See also [CodingBat](https://codingbat.com/java), [TopCoder](https://www.topcoder.com/), [Kaggle](https://www.kaggle.com/competitions), [CodeChef](https://www.codechef.com/ide), and [this challenge](https://dysdoc.github.io/docgen2/index.html) for inspiration
 * Code is uploaded for evaluation/measurement through a simple web interface, no SVN or Git(Hub) connection required
 * Admin: Interface to define a problem and upload a public and a corresponding private dataset (contestant can code and test against public dataset, performance measurement will be against private - and perhaps public - dataset)
 * The uploaded code is executed with the private dataset and analysed for execution time and memory footprint
