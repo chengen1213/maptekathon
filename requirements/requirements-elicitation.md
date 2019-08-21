@@ -6,7 +6,9 @@ This app is inspired by ​TopCoder in the form of a virtual Hackathon. Maptek w
 
 *TODO:* Please name one contact person in the team that I can reach out to regarding questions about requirements.
 
-Firstname Lastname (email@adelaide.edu.au)
+Contact person for PG7:
+
+Qiaoqiao Liu ([qiaoqiao.liu@student.adelaide.edu.au](mailto:qiaoqiao.liu@student.adelaide.edu.au))
 
 ## Additional Details
 
