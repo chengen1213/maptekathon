@@ -45,3 +45,9 @@ Qiaoqiao Liu ([qiaoqiao.liu@student.adelaide.edu.au](mailto:qiaoqiao.liu@student
   * Executing the code in a sandboxed thread on the same server
   * The client is also open for other approaches you propose
   * Security of code execution should be at least considered in the design, even if the actual implementation may not be possible in the short time frame of this project
+
+## Update (30/08/2019)
+
+* The admin *may* choose to specify a specific language for a certain challenge, but in most cases all languages will be supported
+* Regarding code submission, please clarify whether you will support an online form similar to [CodeChef](https://www.codechef.com/ide) or rather a file upload. If you've decided to do the latter, will it be possible to upload multiple files or just one? What about file names?
+* How do you handle library dependencies? Will you limit those to the standard libraries or also allow to add functionality from additional libraries?
