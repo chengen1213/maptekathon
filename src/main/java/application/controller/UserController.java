@@ -1,15 +1,15 @@
-//package controller;
+//package application.controller;
 //
-//import model.User;
+//import application.model.User;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.ui.Model;
 //import org.springframework.validation.BindingResult;
 //import org.springframework.web.bind.annotation.GetMapping;
 //import org.springframework.web.bind.annotation.ModelAttribute;
 //import org.springframework.web.bind.annotation.PostMapping;
-//import service.SecurityService;
-//import service.UserService;
-//import validator.UserValidator;
+//import application.service.SecurityService;
+//import application.service.UserService;
+//import application.validator.UserValidator;
 //
 //public class UserController {
 //    @Autowired
@@ -22,8 +22,8 @@
 //    private UserValidator userValidator;
 //
 //    @GetMapping("/registration")
-//    public String registration(Model model) {
-//        model.addAttribute("userForm", new User());
+//    public String registration(Model application.model) {
+//        application.model.addAttribute("userForm", new User());
 //
 //        return "registration";
 //    }
@@ -44,18 +44,18 @@
 //    }
 //
 ////    @GetMapping("/login")
-//    public String login(Model model, String error, String logout) {
+//    public String login(Model application.model, String error, String logout) {
 //        if (error != null)
-//            model.addAttribute("error", "Your username and password is invalid.");
+//            application.model.addAttribute("error", "Your username and password is invalid.");
 //
 //        if (logout != null)
-//            model.addAttribute("message", "You have been logged out successfully.");
+//            application.model.addAttribute("message", "You have been logged out successfully.");
 //
 //        return "login";
 //    }
 //
 //    @GetMapping({"/", "/welcome"})
-//    public String welcome(Model model) {
+//    public String welcome(Model application.model) {
 //        return "welcome";
 //    }
 //}

@@ -1,9 +1,11 @@
-package service;
+package application.service;
 
-import model.User;
+import application.dto.UserDto;
+import application.model.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
-public interface UserService {
-    void save(User user);
+public interface UserService extends UserDetailsService {
+    void save(UserDto user);
 
-    User findByUsername(String username);
+    User findByUserEmail(String username);
 }

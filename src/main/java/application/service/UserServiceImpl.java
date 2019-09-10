@@ -1,8 +1,8 @@
-//package service;
+//package application.service;
 //
-//import model.RoleRepository;
-//import model.User;
-//import model.UserRepository;
+//import application.model.RoleRepository;
+//import application.model.User;
+//import application.model.UserRepository;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 //import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-//package controller;
+//package application.controller;
 //
 //import application.CookieUtil;
 //import application.JwtUtil;
@@ -33,9 +33,9 @@
 //    }
 //
 //    @RequestMapping(value = "login", method = RequestMethod.POST)
-//    public String login(HttpServletResponse httpServletResponse, String username, String password, String redirect, Model model){
+//    public String login(HttpServletResponse httpServletResponse, String username, String password, String redirect, Model application.model){
 //        if (username == null || !credentials.containsKey(username) || !credentials.get(username).equals(password)){
-//            model.addAttribute("error", "Invalid username or password!");
+//            application.model.addAttribute("error", "Invalid username or password!");
 //            return "login";
 //        }
 //

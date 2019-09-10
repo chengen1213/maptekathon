@@ -1,8 +1,8 @@
-//package service;
+//package application.service;
 //
-//import model.Role;
-//import model.User;
-//import model.UserRepository;
+//import application.model.Role;
+//import application.model.User;
+//import application.model.UserRepository;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.core.GrantedAuthority;
 //import org.springframework.security.core.authority.SimpleGrantedAuthority;

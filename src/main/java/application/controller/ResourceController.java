@@ -1,4 +1,4 @@
-//package controller;
+//package application.controller;
 //
 //import application.CookieUtil;
 //import org.springframework.stereotype.Controller;

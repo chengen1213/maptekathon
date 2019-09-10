@@ -29,6 +29,6 @@ Firstname Lastname (email@adelaide.edu.au)
 * Web interface: emphasise function over form
 * Established implementation stack, not too offbeat (could be Ruby on Rails, ASP.NET, Jakarta EE, Python Flask, etc.)
 * Authentication with email and password (stored securely) but no OAuth required
-* Compile and execute the submitted code as a process spawned from the web service plus a process monitoring the performance of the executed code
+* Compile and execute the submitted code as a process spawned from the web application.service plus a process monitoring the performance of the executed code
 * Wrap third-party tools (gcc, javac, etc.) to compile/run the submitted code
 * Security of code execution!

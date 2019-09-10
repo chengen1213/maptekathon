@@ -1,4 +1,4 @@
-package controller;
+package application.controller;
 
 import application.WebApplication;
 import org.junit.Test;
