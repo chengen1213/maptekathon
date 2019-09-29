@@ -12,6 +12,7 @@ sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
+    flatDir { dirs 'libs' }
 }
 
 dependencies {
@@ -43,8 +44,13 @@ dependencies {
     compile group: 'io.springfox', name: 'springfox-bean-validators', version: '2.9.2'
     // https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api
     compile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.1'
+    // https://mvnrepository.com/artifact/org.jvnet.winp/winp
+    compile group: 'org.jvnet.winp', name: 'winp', version: '1.28'
+    // https://mvnrepository.com/artifact/log4j/log4j
+    compile group: 'log4j', name: 'log4j', version: '1.2.17'
 
 
+    implementation name: 'sigar-1.6.4'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 

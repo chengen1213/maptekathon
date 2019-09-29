@@ -30,7 +30,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //            "/webjars/**"
 //    };
     private static final String[] AUTH_BLACKLIST = {
-//            "/uploadFile"
+//            "/uploadFile",
+//        "/problems/{*id}/solutions"
     };
     @Autowired
     private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;

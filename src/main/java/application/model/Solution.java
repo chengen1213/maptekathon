@@ -1,5 +1,7 @@
 package application.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -7,21 +9,34 @@ import java.util.Objects;
 @Entity
 @Table(name = "solution")
 public class Solution implements Serializable {
-    @Id
+
+    @EmbeddedId
+    SolutionKey id;
+
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn
+    @MapsId("user_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
-    @Id
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn
+    @MapsId("problem_id")
+    @JoinColumn(name = "problem_id")
     private Problem problem;
 
     @Column
     private String language;
 
+    @Lob
     @Column
     private String code;
+
+    @Column
+    private double publicTimeComplexity;
+
+    @Column
+    private double publicSpaceComplexity;
 
     @Column
     private double timeComplexity;
@@ -38,6 +53,14 @@ public class Solution implements Serializable {
 //        this.timeComplexity = timeComplexity;
 //        this.spaceComplexity = spaceComplexity;
 //    }
+
+    public SolutionKey getId() {
+        return id;
+    }
+
+    public void setId(SolutionKey id) {
+        this.id = id;
+    }
 
     public User getUser() {
         return user;
@@ -69,6 +92,22 @@ public class Solution implements Serializable {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public double getPublicTimeComplexity() {
+        return publicTimeComplexity;
+    }
+
+    public void setPublicTimeComplexity(double publicTimeComplexity) {
+        this.publicTimeComplexity = publicTimeComplexity;
+    }
+
+    public double getPublicSpaceComplexity() {
+        return publicSpaceComplexity;
+    }
+
+    public void setPublicSpaceComplexity(double publicSpaceComplexity) {
+        this.publicSpaceComplexity = publicSpaceComplexity;
     }
 
     public double getTimeComplexity() {
