@@ -82,14 +82,14 @@ public class CodeExecutionServiceImpl implements CodeExecutionService {
         for (Data data : solution.getProblem().getPublicDataset()) {
             String[] command = {exeCommand, profilerName, ext, sourcecodeFileName, data.getFileName()};
             String[] info = executeProgram(command, dir, solution);
-            solution.setPublicSpaceComplexity(solution.getSpaceComplexity() + Long.parseLong(info[2]));
-            solution.setPublicTimeComplexity(solution.getTimeComplexity() + Long.parseLong(info[3]));
+            solution.setPublicSpaceComplexity(solution.getSpaceComplexity() + Double.parseDouble(info[2]));
+            solution.setPublicTimeComplexity(solution.getTimeComplexity() + Double.parseDouble(info[3]));
         }
         for (Data data : solution.getProblem().getPrivateDataset()) {
             String[] command = {exeCommand, profilerName, ext, sourcecodeFileName, data.getFileName()};
             String[] info = executeProgram(command, dir, solution);
-            solution.setSpaceComplexity(solution.getSpaceComplexity() + Long.parseLong(info[2]));
-            solution.setTimeComplexity(solution.getTimeComplexity() + Long.parseLong(info[3]));
+            solution.setSpaceComplexity(solution.getSpaceComplexity() + Double.parseDouble(info[2]));
+            solution.setTimeComplexity(solution.getTimeComplexity() + Double.parseDouble(info[3]));
         }
     }
 
