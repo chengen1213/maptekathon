@@ -60,13 +60,7 @@ public class CodeExecutionServiceImpl implements CodeExecutionService {
         }
 
         try {
-            if ("java".equals(ext)) {
-                executeJavaProgram(fileId, ext, dirPath.toFile(), solution);
-            } else if ("cpp".equals(ext)) {
-
-            } else if ("cs".equals(ext)) {
-
-            }
+            executeProgram(fileId, ext, dirPath.toFile(), solution);
         } catch (Exception e) {
             throw new ExecutionErrorException(e.getMessage());
         }
@@ -76,27 +70,33 @@ public class CodeExecutionServiceImpl implements CodeExecutionService {
         Files.copy(source.resolve(fileName), dest.resolve(fileName), StandardCopyOption.REPLACE_EXISTING);
     }
 
-    private void executeJavaProgram(String sourcecodeFileName, String ext, File dir, Solution solution) throws Exception {
-        String[] javac = {"javac", sourcecodeFileName + "." + ext};
-        executeCommand(javac, dir);
+    private void executeProgram(String sourcecodeFileName, String ext, File dir, Solution solution) throws Exception {
+
+        if ("java".equals(ext)) {
+            //javac name.java
+            String[] javac = {"javac", sourcecodeFileName + "." + ext};
+            executeCommand(javac, dir);
+        } else if ("cpp".equals(ext)) {
+            //gcc –o name name.cpp
+            String[] gcc = {"g++", "-o",sourcecodeFileName, sourcecodeFileName + "." + ext};
+            executeCommand(gcc, dir);
+        } else if ("cs".equals(ext)) {
+            //csc name.cs
+            String[] csc = {"csc", sourcecodeFileName + "." + ext};
+            executeCommand(csc, dir);
+        }
         for (Data data : solution.getProblem().getPublicDataset()) {
             String[] command = {exeCommand, profilerName, ext, sourcecodeFileName, data.getFileName()};
-            String[] info = executeProgram(command, dir, solution);
+            String[] info = callProfiler(command, dir);
             solution.setPublicSpaceComplexity(solution.getSpaceComplexity() + Double.parseDouble(info[2]));
             solution.setPublicTimeComplexity(solution.getTimeComplexity() + Double.parseDouble(info[3]));
         }
         for (Data data : solution.getProblem().getPrivateDataset()) {
             String[] command = {exeCommand, profilerName, ext, sourcecodeFileName, data.getFileName()};
-            String[] info = executeProgram(command, dir, solution);
+            String[] info = callProfiler(command, dir);
             solution.setSpaceComplexity(solution.getSpaceComplexity() + Double.parseDouble(info[2]));
             solution.setTimeComplexity(solution.getTimeComplexity() + Double.parseDouble(info[3]));
         }
-    }
-
-    private void executeCppProgram() {
-    }
-
-    private void executeCsProgram() {
     }
 
     private void executeCommand(String[] command, File dir) throws Exception {
@@ -109,7 +109,7 @@ public class CodeExecutionServiceImpl implements CodeExecutionService {
             throw new CanNotCompileException(errMessage);
     }
 
-    private String[] executeProgram(String[] command, File dir, Solution solution) throws Exception {
+    private String[] callProfiler(String[] command, File dir) throws Exception {
         ProcessBuilder execute = new ProcessBuilder(command).directory(dir);
         Process pr = execute.start();
         pr.waitFor();
