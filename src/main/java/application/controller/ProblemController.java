@@ -64,6 +64,7 @@ public class ProblemController {
     @RequestMapping(value = "/problems/{id}", method = RequestMethod.GET)
     ResponseEntity<?> getProblemById(@PathVariable Long id) {
         Problem problem = problemService.findProblemById(id);
+        String aa = problem.getTitle();
         return ResponseEntity.ok(problem);
     }
 

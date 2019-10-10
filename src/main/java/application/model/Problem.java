@@ -32,7 +32,7 @@ public class Problem {
     private Collection<Solution> solutions;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JsonIgnore
+//    @JsonIgnore
     @JoinTable(
             name = "public_dataset",
             joinColumns = @JoinColumn(
@@ -42,7 +42,7 @@ public class Problem {
     private Collection<Data> publicDataset;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JsonIgnore
+//    @JsonIgnore
     @JoinTable(
             name = "private_dataset",
             joinColumns = @JoinColumn(
@@ -50,6 +50,10 @@ public class Problem {
             inverseJoinColumns = @JoinColumn(
                     name = "data_id", referencedColumnName = "id"))
     private Collection<Data> privateDataset;
+
+    public Problem() {
+
+    }
 
     public Long getId() {
         return id;

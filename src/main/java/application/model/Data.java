@@ -15,6 +15,10 @@ public class Data {
     @Column
     private String contentType;
 
+    public Data() {
+
+    }
+
     public Long getId() {
         return id;
     }

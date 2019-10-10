@@ -44,6 +44,10 @@ public class Solution implements Serializable {
     @Column
     private double spaceComplexity;
 
+    public Solution() {
+        
+    }
+
 //    public Solution(){}
 //
 //    public Solution(User user, Problem problem, String code, double timeComplexity, double spaceComplexity) {
