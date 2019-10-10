@@ -45,7 +45,7 @@ public class Solution implements Serializable {
     private double spaceComplexity;
 
     public Solution() {
-        
+
     }
 
 //    public Solution(){}
