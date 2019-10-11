@@ -4,13 +4,16 @@ import application.config.FileStorageProperties;
 import application.exception.FileStorageException;
 import application.exception.MyFileNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -22,6 +25,7 @@ import java.util.UUID;
 public class FileStorageService {
 
     private final Path fileStorageLocation;
+    private final String PROGRAM_NAME = "ProgramProfiler.py";
 
     @Autowired
     public FileStorageService(FileStorageProperties fileStorageProperties) {
@@ -32,6 +36,13 @@ public class FileStorageService {
             Files.createDirectories(this.fileStorageLocation);
         } catch (Exception ex) {
             throw new FileStorageException("Could not create the directory where the uploaded files will be stored.", ex);
+        }
+        try {
+            Resource resource = new ClassPathResource(PROGRAM_NAME);
+            File file = resource.getFile();
+            Files.copy(file.toPath(),fileStorageLocation.resolve(PROGRAM_NAME), StandardCopyOption.REPLACE_EXISTING);
+        } catch (Exception ex) {
+            throw new FileStorageException("Fail to copy ProgramProfiler.py!");
         }
     }
 
