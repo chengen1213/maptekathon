@@ -1,0 +1,12 @@
+.Login{
+
+  position:fixed;
+  top:65px;
+  right:0px;
+  border:1px solid;
+}
+
+.button_class
+{
+  float: center;
+}

@@ -1,0 +1,50 @@
+<h2>Question List</h2>
+<!-- <ul class="questions">
+    <li *ngFor="let question of questions">
+        
+      <a routerLink="/detail/{{question.id}}">        
+        <span class="badge">{{question.id}}</span> 
+        <span class="question_cont">{{question.name}}</span>
+        <button class="delete" title="delete question" (click)="delete(question)">x       
+          </button>      
+      </a>  
+    
+           
+    </li>
+  </ul> -->
+
+  <ul class="arrQuestions">
+
+        <!-- ADD HEADERS -->
+        <tr>
+                <th>ID   </th>
+                <th>Tile                           </th>
+                    <!-- <th>Description</th> -->
+        </tr>
+
+        <!-- BIND ARRAY TO TABLE -->
+        <li *ngFor="let question of arrQuestions; let i = index">
+        
+                <a routerLink="/detail/{{question.id}}">        
+                  <span class="badge">{{question.id}}</span> 
+                  <span class="question_cont">{{question.title}}</span>
+                      
+                </a>  
+                <button class="delete" title="delete question" (click)="delete(i+1)">x       
+                    </button> 
+    </li>
+</ul>
+
+
+<div>
+    <label>Add new questions here:
+      <input #questionTitle />
+    </label>
+    <!-- (click) passes input value to add() and then clears the input -->
+   
+    <button (click)="add(questionTitle.value); questionTitle.value=''">             
+      add
+    </button>
+  
+  </div>
+ 
