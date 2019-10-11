@@ -34,7 +34,6 @@ public class Problem {
     private Collection<Solution> solutions;
 
     @ManyToMany(fetch = FetchType.LAZY)
-//    @JsonIgnore
     @JoinTable(
             name = "public_dataset",
             joinColumns = @JoinColumn(
@@ -44,7 +43,6 @@ public class Problem {
     private Collection<Data> publicDataset;
 
     @ManyToMany(fetch = FetchType.LAZY)
-//    @JsonIgnore
     @JoinTable(
             name = "private_dataset",
             joinColumns = @JoinColumn(

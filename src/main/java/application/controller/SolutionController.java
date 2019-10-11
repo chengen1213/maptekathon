@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class SolutionController {
@@ -29,12 +31,21 @@ public class SolutionController {
     @Autowired
     private CodeExecutionService codeExecutionService;
 
-    @GetMapping("/problems/{id}/solutions")
-    public Solution submitSolution(Principal principal, @PathVariable Long id) {
+    @GetMapping("/problems/{problemId}/solutions/{userId}")
+    public Solution submitSolution(Principal principal, @PathVariable Long problemId,  @PathVariable Long userId) {
         String userName = principal.getName();
         User user = userService.findByUserEmail(userName);
-        SolutionKey solutionKey = new SolutionKey(user.getId(), id);
+        SolutionKey solutionKey = new SolutionKey(user.getId(), problemId);
         return solutionService.findSolutionById(solutionKey);
+    }
+
+    @GetMapping("/problems/{problemId}/solutions")
+    public List<Solution> getSolutions(Principal principal, @PathVariable Long problemId) {
+//        String userName = principal.getName();
+//        User user = userService.findByUserEmail(userName);
+//        SolutionKey solutionKey = new SolutionKey(user.getId(), problemId);
+        Problem problem = problemService.findProblemById(problemId);
+        return new ArrayList<>(problem.getSolutions());
     }
 
     @PostMapping("/problems/{id}/solutions")
