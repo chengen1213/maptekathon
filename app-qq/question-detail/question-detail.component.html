@@ -1,0 +1,95 @@
+
+  <div>
+    <input type="file" ng2FileSelect [uploader]="uploader" />
+      <div *ngFor="let item of uploader.queue">
+            <td><strong>{{ item.file.name }}</strong></td>
+      </div>
+  </div>
+
+  <div>
+
+
+  <button (click)="goBack()">go back</button>
+  </div>
+
+  <div>
+    <button (click)="show()">Show</button>
+  </div>
+
+  <div>
+    <button (click)="get()">Get</button>
+  </div>
+
+  <div>
+    <button (click)="postDataset()">postDataset</button>
+  </div>
+
+  <div>
+    <button (click)="postProblem()">postProblem</button>
+  </div>
+<!-- 
+ <div *ngIf="question">
+    <button routerLink="/detail/{{question.id}}/coding">coding</button>
+     
+    <p>title</p>
+    <textarea input [(ngModel)]="question.title" ></textarea>
+
+    <p>description</p>
+    <textarea input [(ngModel)]="question.description" ></textarea>
+    <p>time_limit</p>
+    <textarea input [(ngModel)]="question.time_limit" ></textarea>
+    <p>private datasets</p>
+    <textarea input [(ngModel)]="question.privateDataset" ></textarea>
+    <button (click)="downLoadPrivate()">downloadDataset</button>
+    <p>Public datasets</p>
+    <textarea input [(ngModel)]="question.publicDataset" ></textarea>
+    <button (click)="downLoadPublic()">downloadDataset</button>
+  
+</div> -->
+
+<form  [formGroup]="formModel" (submit)="mySubmit()">
+   
+    <div *ngIf="question">
+    <button routerLink="/detail/{{question.id}}/coding">coding</button>
+    <p> Question id:</p>
+    <td>{{question.id}}</td>
+
+    <p> Question title:</p>
+    <td>{{question.title}}</td>
+    <p> Edit this question title:</p>
+    <textarea input formControlName="title" name="title" type="text" required patter="[a-zA-Z0-9]+"></textarea>
+
+    <p> Question time limit:</p>
+    <td>{{question.time_limit}}</td>
+    <p> Edit this question time limit:</p>
+    <textarea input formControlName="time_limit" name="time_limit" type="number" required patter="[0-9]+"></textarea>
+
+
+    <p> Question description:</p>
+    <td>{{question.description}}</td>
+    <p> Edit this question description:</p>
+    <textarea input formControlName="description" name="description" type="text" required patter="[a-zA-Z0-9]+"></textarea>
+    
+    <p>private datasets:</p>
+    <td>
+      <div>
+          {{question.privateDataset.id}}
+          <button (click)="downLoadPrivate()">downloadDataset</button>
+      </div>
+       
+    </td>
+    
+    <p>Public datasets:</p>
+    <td>
+        {{question.publicDataset.id}}
+        <button (click)="downLoadPublic()">downloadDataset</button>
+    </td>
+    <button type="submit">Update</button>
+    
+</div>
+
+</form>
+<button class="delete" title="delete" (click)="delete()">Delete this question</button> 
+
+
+

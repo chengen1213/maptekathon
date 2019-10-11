@@ -1,0 +1,59 @@
+<!-- <h1>{{title}}</h1> -->
+<!-- 
+<nav>
+    <a routerLink="/dashboard">Dashboard</a>
+    <a routerLink="/questions">Questions</a>
+    <a routerLink="/leader/ranking1">Leaderboard-rangking1</a>
+    <a routerLink="/leader/ranking2">Leaderboard-rangking2</a>
+
+</nav> -->
+
+
+<nz-layout class="layout">
+    <nz-header>
+        <a nz-dropdown class="hhh" [nzDropdownMenu]="menu">
+            User
+            <i nz-icon nzType="down"></i>
+          </a>
+          <nz-dropdown-menu #menu="nzDropdownMenu">
+            <ul nz-menu nzSelectable>
+              <li nz-menu-item>exit</li>
+              <!-- <li nz-menu-item>2nd menu item</li>
+              <li nz-menu-item>3rd menu item</li> -->
+            </ul>
+          </nz-dropdown-menu>
+  
+      <div class="logo">
+        <span class="logo_title">Maptek-a-thon</span>
+      </div>
+  
+    </nz-header>
+
+    <ul nz-menu nzTheme="dark" nzMode="horizontal">
+            <li nz-menu-item><a [routerLink]="[ 'dashboard' ]" routerLinkActive="active">Dashboard</a></li>
+            <li nz-menu-item><a [routerLink]="[ '/questions' ]" routerLinkActive="active">QuestionList</a></li>
+            <li nz-menu-item><a [routerLink]="[ '/leader/ranking1' ]" routerLinkActive="active">Total Ranking</a></li>
+            <li nz-menu-item><a [routerLink]="[ '/leader/ranking2' ]" routerLinkActive="active">Ranking(C++/Java)</a></li>
+          </ul>
+
+    <nz-content>
+      <!-- <nz-breadcrumb>
+        <nz-breadcrumb-item>Home</nz-breadcrumb-item>
+        <nz-breadcrumb-item>Leaderboard</nz-breadcrumb-item>
+        <nz-breadcrumb-item>App</nz-breadcrumb-item>
+      </nz-breadcrumb> -->
+      <div class="inner-content">
+
+        <router-outlet></router-outlet>
+    
+  
+      </div>
+  
+  
+    </nz-content>
+    <nz-footer>Maptek-a-thon</nz-footer>
+  
+  </nz-layout>
+  
+  <!-- <router-outlet></router-outlet> -->
+  
