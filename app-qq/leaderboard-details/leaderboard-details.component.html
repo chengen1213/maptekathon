@@ -1,0 +1,25 @@
+<ul class="solutions">
+
+        Leader Board
+        <tr>
+                <th>ID   </th>
+                <th>Tile                           </th>
+                    <!-- <th>Description</th> -->
+        </tr>
+
+        <!-- BIND ARRAY TO TABLE -->
+        <li *ngFor="let solution of solutions; let i = index" >
+        
+                <!-- <a routerLink="/detail/{{question.id}}" (click)="sendID(question.id)" >         -->
+                  <span class="badge">{{solution.id}}</span> 
+                  <span class="question_cont">{{solution[i].id.userId}}</span>
+                  <span class="question_cont">{{solution[i].language}}</span>
+                <!-- </a>   -->
+
+              
+                <!-- <button class="delete" title="delete question" (click)="delete(question.id) " 
+                >x        -->
+               
+                    <!-- </button>  -->
+    </li>
+</ul>

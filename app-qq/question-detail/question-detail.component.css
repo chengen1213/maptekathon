@@ -43,3 +43,6 @@
   .drop-file-over{
   background: #333;
   }
+  object:focus {
+    outline: none;
+  }

@@ -24,6 +24,8 @@ import { NgZorroAntdModule, NZ_I18N, en_US } from 'ng-zorro-antd';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import en from '@angular/common/locales/en';
+import { LeaderboardComponent } from './leaderboard/leaderboard.component';
+import { LeaderboardDetailsComponent } from './leaderboard-details/leaderboard-details.component';
 
 registerLocaleData(en);
 
@@ -41,7 +43,9 @@ registerLocaleData(en);
     QuestionDetailComponent,
     SignupComponent,
     CodingComponent,
-    QuestionsComponent
+    QuestionsComponent,
+    LeaderboardComponent,
+    LeaderboardDetailsComponent
   ],
   imports: [
     BrowserModule,
