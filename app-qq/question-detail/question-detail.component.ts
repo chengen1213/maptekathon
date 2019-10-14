@@ -138,7 +138,7 @@ export class QuestionDetailComponent implements OnInit {
       { 
 
         // this.publicDataset=response as string [];
-        this.publicDataset=response.id;
+        // this.publicDataset=response.id;
         console.log(this.publicDataset);
        
       })

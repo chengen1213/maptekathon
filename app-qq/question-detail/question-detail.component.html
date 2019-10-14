@@ -70,20 +70,18 @@
     <p> Edit this question description:</p>
     <textarea input formControlName="description" name="description" type="text" required patter="[a-zA-Z0-9]+"></textarea>
     
-    <p>private datasets:</p>
-    <td>
-      <div>
-          {{question.privateDataset}}
-          <button (click)="downLoadPrivate()">downloadDataset</button>
-      </div>
-       
+    <p>private datasets Id:</p>
+    <td *ngFor="let P_data of question.privateDataset">
+          {{P_data.privateDataset}} 
     </td>
+    <button (click)="downLoadPrivate()">downloadDataset</button>
     
-    <p>Public datasets:</p>
-    <td>
-        {{question.publicDataset}}
-        <button (click)="downLoadPublic()">downloadDataset</button>
+    <p>Public datasets ID:</p>
+    <td *ngFor="let data of question.publicDataset">        
+        {{data.id}}
     </td>
+        <button (click)="downLoadPublic()">downloadDataset</button>
+   
     <button type="submit">Update</button>
     
 </div>

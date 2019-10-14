@@ -6,6 +6,8 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { DatePipe, registerLocaleData } from '@angular/common';
 import {Observable} from "rxjs";
 import { ReactiveFormsModule } from '@angular/forms'
+import {MatDialogModule} from '@angular/material';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -27,6 +29,7 @@ import en from '@angular/common/locales/en';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { LeaderboardDetailsComponent } from './leaderboard-details/leaderboard-details.component';
 
+
 registerLocaleData(en);
 
 // {
@@ -45,7 +48,8 @@ registerLocaleData(en);
     CodingComponent,
     QuestionsComponent,
     LeaderboardComponent,
-    LeaderboardDetailsComponent
+    LeaderboardDetailsComponent,
+  
   ],
   imports: [
     BrowserModule,
@@ -56,8 +60,9 @@ registerLocaleData(en);
     IconsProviderModule,
     NgZorroAntdModule,
     BrowserAnimationsModule,
-    
-    ReactiveFormsModule,    
+    ReactiveFormsModule, 
+    NgbModule,   
+    MatDialogModule
 
   ],
   providers: [DatePipe, { provide: NZ_I18N, useValue: en_US }],
