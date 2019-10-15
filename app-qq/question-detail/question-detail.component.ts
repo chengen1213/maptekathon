@@ -5,11 +5,13 @@ import {DatePipe} from "@angular/common"
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Location } from '@angular/common';
+import { FormGroup, FormControl, FormArray } from '@angular/forms';
 
 import { ActivatedRoute } from '@angular/router';
 import { QuestionService }  from '../question.service';
-import { Location } from '@angular/common';
-import { FormGroup, FormControl, FormArray } from '@angular/forms';
+
+
 
 
 @Component({
@@ -42,12 +44,13 @@ export class QuestionDetailComponent implements OnInit {
   expirationDate =  "2019-02-03 10:08:02";
 
   publicDataset =  ["1"];
-  uploaded_public: string [];
+  uploaded_public: [];
   privateDataset = [];
 
   private formModel: FormGroup;
 
   private question: any;
+  private questionID:number;
   // public question: any ;
 
 
@@ -56,6 +59,7 @@ export class QuestionDetailComponent implements OnInit {
     private datePipe:DatePipe,
     private route: ActivatedRoute,
     private questionService: QuestionService,
+
     private location: Location,
     
    
@@ -88,8 +92,7 @@ export class QuestionDetailComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.getQuestion();
-    
+    this.getQuestion();  
     
   }
   goBack(): void {
@@ -97,20 +100,21 @@ export class QuestionDetailComponent implements OnInit {
   }
   
 
-  getQuestion(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.questionService.getQuestion(id).subscribe(data => {
+  getQuestion() {
+    // const id = +this.route.snapshot.paramMap.get('id');
+    this.questionID = this.questionService.getID();
+    this.questionService.getQuestion(this.questionID).subscribe(data => {
       this.question = data;
       console.log(this.question);
   });
 }
 
-delete(): void {
-  const id = +this.route.snapshot.paramMap.get('id');
-  this.questionService.deleteQuestion(id);
-  console.log(id);
-  // this.goBack();
-}
+// delete(): void {
+//   const id = +this.route.snapshot.paramMap.get('id');
+//   this.questionService.deleteQuestion(this.questionID);
+//   console.log(id);
+//   // this.goBack();
+// }
 
 
 
@@ -132,8 +136,10 @@ delete(): void {
       data.append('file',file_2,file_2.name);
       this.http.post(this.apiUpload,data).subscribe((response)=>
       { 
-        this.publicDataset=response as string [];
-        console.log(this.publicDataset.id);
+
+        // this.publicDataset=response as string [];
+        // this.publicDataset=response.id;
+        console.log(this.publicDataset);
        
       })
      

@@ -9,6 +9,8 @@ import { QuestionDetailComponent } from './question-detail/question-detail.compo
 import { SignupComponent } from './signup/signup.component';
 import { CodingComponent } from './coding/coding.component';
 import { QuestionsComponent } from './questions/questions.component';
+import { LeaderboardComponent } from './leaderboard/leaderboard.component';
+import { LeaderboardDetailsComponent } from './leaderboard-details/leaderboard-details.component';
 
 const routes: Routes = [
   // { path: 'questions', component: QuestionsComponent },
@@ -20,8 +22,8 @@ const routes: Routes = [
   { path:'detail/:id/:coding', component:CodingComponent },
   
   { path: 'questions', component: QuestionsComponent },
-
-
+  { path: 'leaderboard', component: LeaderboardComponent },
+  { path: 'leaderboard-details/:id', component: LeaderboardDetailsComponent },
 ];
 
 @NgModule({

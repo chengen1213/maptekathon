@@ -1,0 +1,15 @@
+
+.popover-title
+{
+    
+     background-color:black;color:white
+}
+
+.popover-no-margin .popover-content {
+    padding: 0px; 
+  }
+ .custom .popover-line {
+    color: white; 
+    background-color: black;
+   }
+

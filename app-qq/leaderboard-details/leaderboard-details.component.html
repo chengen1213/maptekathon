@@ -1,0 +1,65 @@
+<nz-table #nzTable [nzData]="solustions">
+        <!-- <nz-table #nzTable [nzData]="listOfData" [nzLoading]="loading" [nzTotal]="total" [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize" (nzPageIndexChange)="searchData()"> -->
+            <thead>
+              <tr>
+                <th nzCustomFilter>
+                  Question ID
+                </th>
+                <th nzCustomFilter> Rangking</th>
+                <th nzCustomFilter>User Id
+                    <i
+                    class="ant-table-filter-icon"
+                    nz-icon
+                    nz-dropdown
+                    #dropdown="nzDropdown"
+                    nzType="search"
+                    [nzDropdownMenu]="menu"
+                    [class.ant-table-filter-open]="dropdown.nzVisible"
+                    nzTrigger="click"
+                    nzPlacement="bottomRight"
+                    [nzClickHide]="false"
+                    nzTableFilter
+                  ></i>
+                </th>
+                <th nzCustomFilter>Language</th>
+                <th nzCustomFilter>Complexity</th>
+              </tr>
+              
+            </thead>
+            <tbody>
+              <tr *ngFor="let solution of solutions; let i = index">
+                <td>
+                        {{solution.id.problemId}}
+                </td> 
+                <td>
+                        {{i+1}}
+                </td> 
+                <td>
+                        {{solution.id.userId}}
+                </td> 
+                <td>
+                        {{solution.language}}
+                </td> 
+                <td> 
+                        {{solution.publicSpaceComplexity}}
+                </td>
+
+                <div class="custom">
+                        <button type="button" class="btn btn-outline-secondary" placement="top"
+                        popover-class="popover-no-margin" ngbPopover="{{solution.code}}" popoverTitle="Code">
+                                Code
+                        </button>
+                </div>
+             
+              </tr>
+            </tbody>
+          </nz-table>
+          <nz-dropdown-menu #menu="nzDropdownMenu">
+            <!-- <div class="search-box"> -->
+              <!-- <input type="text" nz-input placeholder="Search Id" [(ngModel)]="searchValue" /> -->
+              <!-- <button nz-button nzSize="small" nzType="primary" (click)="search()" class="search-button">
+                Search
+              </button> -->
+              <!-- <button nz-button nzSize="small" (click)="reset()">Reset</button> -->
+            <!-- </div> -->
+          </nz-dropdown-menu>

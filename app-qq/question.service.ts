@@ -6,12 +6,13 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { HttpHeaders } from '@angular/common/http';
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class QuestionService {
   questions: string [];
-
+  questionID: number;
   constructor(private http: HttpClient) {}
   apiGetQuestion:any = 'http://localhost:8080/problems';
   // public questionsUrl = 'api/questions';  // URL to web api
@@ -38,7 +39,13 @@ export class QuestionService {
     const url = `${this.apiGetQuestion}/${id}`;
     return this.http.get<any>(url);
   }
-
+  sendID(id: number){
+    return   this.questionID=id;
+  }
+  getID(){    
+    return this.questionID;
+    console.log(this.questionID);
+  }
 
   getQuestions()
   {   
@@ -69,6 +76,14 @@ deleteQuestion (id: number): Observable<any> {
   // private log(message: string) {
   //   this.messageService.add(`QuestionService: ${message}`);
   // }
+
+getSolutions(id: number){
+ 
+   const url = `${this.apiGetQuestion}/${id}/solutions`;
+   console.log(url);   
+  return this.http.get<any>(url);
+  }
+  
 }
 
 

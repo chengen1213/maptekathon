@@ -13,38 +13,129 @@
     </li>
   </ul> -->
 
-  <ul class="arrQuestions">
+  <!-- <ul class="arrQuestions">
 
-        <!-- ADD HEADERS -->
+      
         <tr>
                 <th>ID   </th>
                 <th>Tile                           </th>
-                    <!-- <th>Description</th> -->
+                
         </tr>
 
-        <!-- BIND ARRAY TO TABLE -->
-        <li *ngFor="let question of arrQuestions; let i = index">
+      
+        <li *ngFor="let question of arrQuestions; let i = index" >
         
-                <a routerLink="/detail/{{question.id}}">        
+                <a routerLink="/detail/{{question.id}}" (click)="sendID(question.id)" >        
                   <span class="badge">{{question.id}}</span> 
                   <span class="question_cont">{{question.title}}</span>
                       
                 </a>  
-                <button class="delete" title="delete question" (click)="delete(i+1)">x       
-                    </button> 
+
+                <a routerLink="/leaderboard-details/{{question.id}}" >  
+                    <span class="badge">LeaderBoard of this Question</span> 
+                </a>  
+                <button class="delete" title="delete question" (click)="delete(question.id) " 
+                >x </button> 
     </li>
-</ul>
+</ul> -->
+
+<nz-table #nzTable [nzData]="arrQuestions">
+        <!-- <nz-table #nzTable [nzData]="listOfData" [nzLoading]="loading" [nzTotal]="total" [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize" (nzPageIndexChange)="searchData()"> -->
+            <thead>
+              <tr>
+                <th nzCustomFilter>
+                  Question ID
+                </th>
+                <th nzCustomFilter>Title
+                    <i
+                    class="ant-table-filter-icon"
+                    nz-icon
+                    nz-dropdown
+                    #dropdown="nzDropdown"
+                    nzType="search"
+                    [nzDropdownMenu]="menu"
+                    [class.ant-table-filter-open]="dropdown.nzVisible"
+                    nzTrigger="click"
+                    nzPlacement="bottomRight"
+                    [nzClickHide]="false"
+                    nzTableFilter
+                  ></i>
+                </th>
+                <th nzCustomFilter>LeaderBoard</th>
+                <th nzCustomFilter>Delete</th>
+              </tr>
+              
+            </thead>
+            <tbody>
+              <tr *ngFor="let question of arrQuestions; let i = index">
+                <td><a routerLink="/detail/{{question.id}}" (click)="sendID(question.id)" > 
+                {{ question.id }} 
+                </a></td> 
+                <td><a routerLink="/detail/{{question.id}}" (click)="sendID(question.id)" > 
+                {{ question.title }}
+                </a></td> 
+                <td><a routerLink="/leaderboard-details/{{question.id}}" > 
+                LeaderBoard of this Question
+                </a></td> 
+                <td> <button class="delete" title="delete question" (click)="delete(question.id) " 
+                >x </button> 
+                </td>
+              </tr>
+            </tbody>
+          </nz-table>
+          <nz-dropdown-menu #menu="nzDropdownMenu">
+            <!-- <div class="search-box"> -->
+              <!-- <input type="text" nz-input placeholder="Search Id" [(ngModel)]="searchValue" /> -->
+              <!-- <button nz-button nzSize="small" nzType="primary" (click)="search()" class="search-button">
+                Search
+              </button> -->
+              <!-- <button nz-button nzSize="small" (click)="reset()">Reset</button> -->
+            <!-- </div> -->
+          </nz-dropdown-menu>
+
 
 
 <div>
-    <label>Add new questions here:
-      <input #questionTitle />
-    </label>
+    <h2>Add new questions here:</h2>
+   
     <!-- (click) passes input value to add() and then clears the input -->
    
-    <button (click)="add(questionTitle.value); questionTitle.value=''">             
-      add
-    </button>
+    
+
+    <form  [formGroup]="formModel"  >
+   
+            <p> Edit this question title:</p>
+            <textarea input formControlName="title" name="title" type="text" required patter="[a-zA-Z0-9]+"></textarea>
+        
+            <p> Edit this question time limit:</p>
+            <textarea input formControlName="time_limit" name="time_limit" type="number" required patter="[0-9]+"></textarea>
+        
+    
+            <p> Edit this question description:</p>
+            <textarea input formControlName="description" name="description" type="text" required patter="[a-zA-Z0-9]+"></textarea>
+            <p> Upload Public dataset:</p>
+            <div>
+                    <input type="file" ng2FileSelect [uploader]="uploader" />
+                      <div *ngFor="let item of uploader.queue">
+                            <td><strong>{{ item.file.name }}</strong></td>
+                      </div>
+            </div>
+            <div>
+                    <button  class="delete"  (click)="postPublicDataset()">Post Public Dataset</button>
+
+                    <p> <button class="delete" (click)="add(); " >
+                        <!-- onClick="window.location.reload();" -->
+                        
+                            Add This Question
+                          </button>
+                    </p>
+                    
+            </div>
+
+        </form>
+
+
+
   
   </div>
  
