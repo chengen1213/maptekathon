@@ -29,6 +29,38 @@ public class ProblemController {
     @RequestMapping(value = "/problems", method = RequestMethod.POST)
     ResponseEntity<?> addProblem(@RequestBody ProblemDto problemDto, HttpServletRequest request) {
         Problem problem = new Problem();
+        setProblemContent(problem, problemDto);
+        problemService.addProblem(problem);
+        return ResponseEntity.ok(problem);
+    }
+
+    @RequestMapping(value = "/problems", method = RequestMethod.GET)
+    ResponseEntity<?> getProblems() {
+        List<Problem> problems = problemService.getAllProblems();
+        return ResponseEntity.ok(problems);
+    }
+
+    @RequestMapping(value = "/problems/{id}", method = RequestMethod.GET)
+    ResponseEntity<?> getProblemById(@PathVariable Long id) {
+        Problem problem = problemService.findProblemById(id);
+        return ResponseEntity.ok(problem);
+    }
+
+    @RequestMapping(value = "/problems/{id}", method = RequestMethod.PUT)
+    ResponseEntity<?> updateProblemById(@PathVariable Long id, @RequestBody ProblemDto problemDto) {
+        Problem problem = problemService.findProblemById(id);
+        setProblemContent(problem, problemDto);
+        problemService.addProblem(problem);
+        return ResponseEntity.ok(problem);
+    }
+
+    @RequestMapping(value = "/problems/{id}", method = RequestMethod.DELETE)
+    ResponseEntity<?> deleteProblemById(@PathVariable Long id) {
+        problemService.deleteProblemById(id);
+        return ResponseEntity.ok(new CommonResponse("Delete problem " + id + " successfully!"));
+    }
+
+    private void setProblemContent(Problem problem, ProblemDto problemDto) {
         problem.setTitle(problemDto.getTitle());
         problem.setDescription(problemDto.getDescription());
         problem.setCreationDate(new Date());
@@ -50,27 +82,5 @@ public class ProblemController {
 
         problem.setPublicDataset(publicDataSet);
         problem.setPrivateDataset(privateDataSet);
-        problemService.addProblem(problem);
-
-        return ResponseEntity.ok(problem);
-    }
-
-    @RequestMapping(value = "/problems", method = RequestMethod.GET)
-    ResponseEntity<?> getProblems() {
-        List<Problem> problems = problemService.getAllProblems();
-        return ResponseEntity.ok(problems);
-    }
-
-    @RequestMapping(value = "/problems/{id}", method = RequestMethod.GET)
-    ResponseEntity<?> getProblemById(@PathVariable Long id) {
-        Problem problem = problemService.findProblemById(id);
-        String aa = problem.getTitle();
-        return ResponseEntity.ok(problem);
-    }
-
-    @RequestMapping(value = "/problems/{id}", method = RequestMethod.DELETE)
-    ResponseEntity<?> deleteProblemById(@PathVariable Long id) {
-        problemService.deleteProblemById(id);
-        return ResponseEntity.ok(new CommonResponse("Delete problem " + id + " successfully!"));
     }
 }

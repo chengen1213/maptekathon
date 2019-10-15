@@ -1,6 +1,7 @@
 package application.controller;
 
 import application.dto.UploadFileResponse;
+import application.exception.MyFileNotFoundException;
 import application.model.Data;
 import application.service.DataService;
 import application.service.FileStorageService;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -52,10 +54,14 @@ public class DataController {
                 .collect(Collectors.toList());
     }
 
-    @GetMapping("/downloadFile/{fileName:.+}")
-    public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request) {
+    @GetMapping("/downloadFile/{id}")
+    public ResponseEntity<Resource> downloadFile(@PathVariable long id, HttpServletRequest request) {
         // Load file as Resource
-        Resource resource = fileStorageService.loadFileAsResource(fileName);
+        Optional<Data> optional = dataService.findDataById(id);
+        if (!optional.isPresent())
+            throw new MyFileNotFoundException("Cannot find data: id = " + id);
+        Data data = optional.get();
+        Resource resource = fileStorageService.loadFileAsResource(data.getFileName());
 
         // Try to determine file's content type
         String contentType = null;
