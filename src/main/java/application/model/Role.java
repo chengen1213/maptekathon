@@ -1,5 +1,7 @@
 package application.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -13,9 +15,11 @@ public class Role {
     private String name;
 
     @ManyToMany(mappedBy = "roles")
+    @JsonIgnore
     private Collection<User> users;
 
     @ManyToMany
+    @JsonIgnore
     @JoinTable(
             name = "roles_privileges",
             joinColumns = @JoinColumn(
