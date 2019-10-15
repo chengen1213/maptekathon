@@ -4,8 +4,10 @@ import application.config.JwtTokenUtil;
 import application.dto.JwtRequest;
 import application.dto.JwtResponse;
 import application.dto.UserDto;
+import application.model.Role;
 import application.model.User;
 import application.service.JwtUserDetailsService;
+import application.service.UserService;
 import application.validation.EmailExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -27,6 +32,8 @@ public class JwtAuthenticationController {
     private JwtTokenUtil jwtTokenUtil;
     @Autowired
     private JwtUserDetailsService userDetailsService;
+    @Autowired
+    private UserService userService;
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
@@ -34,7 +41,9 @@ public class JwtAuthenticationController {
         final UserDetails userDetails = userDetailsService
                 .loadUserByUsername(authenticationRequest.getEmail());
         final String token = jwtTokenUtil.generateToken(userDetails);
-        return ResponseEntity.ok(new JwtResponse(token));
+        User user = userService.findByUserEmail(authenticationRequest.getEmail());
+        List<Role> roles = new ArrayList<>(user.getRoles());
+        return ResponseEntity.ok(new JwtResponse(token, roles.get(0).getName()));
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
