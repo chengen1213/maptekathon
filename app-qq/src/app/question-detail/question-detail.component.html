@@ -1,0 +1,120 @@
+  <div>
+  <button (click)="goBack()">go back</button>
+  </div>
+
+  
+
+<h2>Question Details:</h2>
+
+<form  [formGroup]="formModel" (submit)="mySubmit()">
+<div *ngIf="question">
+  
+    <button routerLink="/detail/{{question.id}}/coding">coding</button>
+    <td>
+      <p> Question id:</p>
+      {{question.id}}
+    </td>
+    <p> </p>
+
+    <td>
+      <p> Question title:</p>
+      {{question.title}}
+    </td>
+    <p> </p>
+ 
+    <td>
+      <p> Question time limit:</p>
+      {{question.expirationDate}}
+    </td>
+    <p> </p>  
+
+    <td>
+      <p> Question description:</p>
+      {{question.description}}
+    </td>
+    <p> </p> 
+
+    <td>
+    <p>private datasets Id:</p>
+     <div *ngFor="let P_data of question.privateDataset">
+          {{P_data.id}} 
+          <p> 
+          <button (click)="downLoadPrivate(P_data.id)">downloadDataset</button></p>
+    </div>
+    
+    </td>
+    <p> </p>
+
+    <td>
+    <p>Public datasets ID:</p>
+    <div *ngFor="let data of question.publicDataset">     
+        {{data.id}} 
+        <p> </p>
+         <button (click)="downLoadPublic(data.id)">downloadDataset</button>
+    </div>
+    </td>
+  
+  <h1></h1>
+  <div *ngIf = "role_admin">
+  <h2>Edit and Update Question:</h2>
+  
+    <p> </p>
+    <td>
+      <p> Question id:</p>
+      {{question.id}}
+    </td>
+    <p> </p>
+    <td>
+      <p> Edit this question title:</p>
+      <textarea input formControlName="title" name="title" type="text" required patter="[a-zA-Z0-9]+"></textarea>
+    </td>
+    <p> </p>
+
+    <td>
+      <p> Edit this question time limit:</p>
+      <textarea input formControlName="time_limit" name="time_limit" type="number" required patter="[0-9]+"></textarea>
+    </td>
+    <p> </p>
+
+    <td>
+      <p> Edit this question description:</p>
+      <textarea input formControlName="description" name="description" type="text" required patter="[a-zA-Z0-9]+"></textarea>
+    </td>
+    <p> </p>
+    <p> ADD Private dataset:</p>
+    <div>
+            <input type="file" ng2FileSelect [uploader]="uploader" />
+              <div *ngFor="let item of uploader.queue">
+                    <td><strong>{{ item.file.name }}</strong></td>
+              </div>
+    </div>
+    <div>
+      <button  class="delete"  (click)="postPrivateDataset()">ADD new Private Dataset</button>
+    </div>
+
+
+    <p> Update Public dataset:</p>
+    <div>
+            <input type="file" ng2FileSelect [uploader]="uploader" />
+              <div *ngFor="let item of uploader.queue">
+                    <td><strong>{{ item.file.name }}</strong></td>
+              </div>
+    </div>
+    <div>
+            <button  class="delete"  (click)="postPublicDataset()">Add new Public Dataset</button>
+
+    </div>
+
+    <div>
+        <button (click)="mySubmit()">Update</button>
+    </div>
+   
+ </div> 
+</div>
+
+
+</form>
+
+
+
+

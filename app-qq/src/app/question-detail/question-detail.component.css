@@ -1,0 +1,80 @@
+
+.example-form {
+    display: flex;
+    flex-direction: column;
+   
+  }
+  
+  .example-full-width >* {
+    width: 100%;
+    min-width: 150px;
+    height: 300px;
+  }
+  .title >* {
+    width: 100%;
+    min-width: 150px;
+    height: 20px;
+  }
+  
+  
+  .file-upload >* {
+    width: 100%;
+    min-width: 150px;
+    height: 300px;
+  }
+  
+  .area {
+    width: 77%;
+    padding: 15px;
+    margin: 15px;
+    border: 1px solid #333;
+    background: rgba(0,0,0,0.7);
+  }
+  
+  #dropZone {
+    border: 2px dashed #bbb;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    padding: 50px;
+    text-align: center;
+    font: 21pt bold arial;
+    color: #bbb;
+  }
+  
+  .drop-file-over{
+  background: #333;
+  }
+  object:focus {
+    outline: none;
+  }
+
+  table, th, td 
+{
+    margin: 5px 0;
+    border: solid 1px #333;
+    padding: 4px 4px;
+    font: 15px Verdana;
+
+    width: 60em;
+    min-width: 150px;
+    height: auto;
+}
+th {
+    font-weight:bold;
+}
+
+
+button {
+    background-color: #eee;
+    border: solid;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    cursor: hand;
+    font-family: Arial;
+  }
+  
+  button:hover {
+    background-color: #cfd8dc;
+  }
+  

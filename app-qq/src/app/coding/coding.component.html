@@ -1,0 +1,13 @@
+<p>Please input your solution</p>
+
+
+<textarea rows = "30" cols= "100" input [(ngModel)]="solution" ></textarea>
+<h1>select language</h1>
+<select [(ngModel)]="selectedLevel" (change)="selected()">
+    <option *ngFor="let item of data" [ngValue]="item">{{item}}</option>
+</select>
+{{selectedLevel | json}}
+
+<button (click)=show()>show</button>
+
+<button (click)=post()>post</button>
