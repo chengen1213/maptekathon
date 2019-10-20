@@ -1,0 +1,125 @@
+<h2>Question List</h2>
+
+<nz-table #nzTable [nzData]="arrQuestions">
+        <!-- <nz-table #nzTable [nzData]="listOfData" [nzLoading]="loading" [nzTotal]="total" [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize" (nzPageIndexChange)="searchData()"> -->
+            <thead>
+              <tr>
+                <th nzCustomFilter>
+                  Question ID
+                </th>
+                <th nzCustomFilter>Title
+                    <i
+                    class="ant-table-filter-icon"
+                    nz-icon
+                    nz-dropdown
+                    #dropdown="nzDropdown"
+                    nzType="search"
+                    [nzDropdownMenu]="menu"
+                    [class.ant-table-filter-open]="dropdown.nzVisible"
+                    nzTrigger="click"
+                    nzPlacement="bottomRight"
+                    [nzClickHide]="false"
+                    nzTableFilter
+                  ></i>
+                </th>
+                <th nzCustomFilter>LeaderBoard</th>
+                <th nzCustomFilter>Delete</th>
+              </tr>
+              
+            </thead>
+            <tbody>
+              <tr *ngFor="let question of arrQuestions; let i = index">
+                <td><a routerLink="/detail/{{question.id}}" (click)="sendID(question.id)" > 
+                {{ question.id }} 
+                </a></td> 
+                <td><a routerLink="/detail/{{question.id}}" (click)="sendID(question.id)" > 
+                {{ question.title }}
+                </a></td> 
+                <td><a routerLink="/leaderboard-details/{{question.id}}" > 
+                LeaderBoard of this Question
+                </a></td> 
+                <td> <button class="delete" title="delete question" (click)="delete(question.id) " 
+                >x </button> 
+                </td>
+              </tr>
+            </tbody>
+          </nz-table>
+          <nz-dropdown-menu #menu="nzDropdownMenu">
+            <!-- <div class="search-box"> -->
+              <!-- <input type="text" nz-input placeholder="Search Id" [(ngModel)]="searchValue" /> -->
+              <!-- <button nz-button nzSize="small" nzType="primary" (click)="search()" class="search-button">
+                Search
+              </button> -->
+              <!-- <button nz-button nzSize="small" (click)="reset()">Reset</button> -->
+            <!-- </div> -->
+          </nz-dropdown-menu>
+
+
+
+<div *ngIf = "role_admin">
+    <h2>Add new questions here:</h2>
+  
+    <!-- (click) passes input value to add() and then clears the input -->
+   
+    
+
+    <form  [formGroup]="formModel"  >
+   
+            <p> Edit this question title:</p>
+            <textarea input formControlName="title" name="title" type="text" required patter="[a-zA-Z0-9]+"></textarea>
+        
+            <p> Edit this question time limit:</p>
+            <textarea input formControlName="time_limit" name="time_limit" type="number" required patter="[0-9]+"></textarea>
+        
+            <div>
+              <h3>select the language</h3>
+              <select [(ngModel)]="selectedLevel" (change)="selected()" [ngModelOptions]="{standalone: true}">
+                  <option *ngFor="let item of data" [ngValue]="item">{{item}}</option>
+              </select>
+              {{selectedLevel | json}}
+            </div>
+           
+
+
+            <p> Edit this question description:</p>
+            <textarea input formControlName="description" name="description" type="text" required patter="[a-zA-Z0-9]+"></textarea>
+            <p> Upload Public dataset:</p>
+            <div>
+                    <input type="file" ng2FileSelect [uploader]="uploader" />
+                      <div *ngFor="let item of uploader.queue">
+                            <td><strong>{{ item.file.name }}</strong></td>
+                      </div>
+            </div>
+            <div>
+                    <button  class="delete"  (click)="postPublicDataset()">Post Public Dataset</button>
+
+            </div>
+            <p> Upload Private dataset:</p>
+            <div>
+                    <input type="file" ng2FileSelect [uploader]="uploader" />
+                      <div *ngFor="let item of uploader.queue">
+                            <td><strong>{{ item.file.name }}</strong></td>
+                      </div>
+            </div>
+            <div>
+            <button  class="delete"  (click)="postPrivateDataset()">Post Private Dataset</button>
+            </div>
+
+            <div>
+
+                <p> <button class="delete" (click)="add(); " >
+                        <!-- onClick="window.location.reload();" -->
+                        
+                            Add This Question
+                          </button>
+                </p>
+                    
+            </div>
+
+        </form>
+
+
+
+  
+  </div>
+ 

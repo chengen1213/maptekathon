@@ -1,0 +1,128 @@
+/* 
+
+ .custom .popover-title
+{
+     background-color:black;color:white
+}
+.custom .popover-content
+{
+     color: red;
+
+ } */
+
+
+ /* HeroesComponent's private CSS styles */
+.solustions {
+     margin: 0 0 2em 0;
+     list-style-type: none;
+     padding: 0;
+     width: 60em;
+   }
+   .solustions li {
+     cursor: pointer;
+     position: relative;
+     left: 0;
+     background-color: #EEE;
+     margin: .5em;
+     padding: .3em 0;
+     height: 1.6em;
+     border-radius: 4px;
+   }
+   .solustions li:hover {
+     color: #607D8B;
+     background-color: #DDD;
+     left: .1em;
+   }
+   .solustions li.selected {
+     background-color: #CFD8DC;
+     color: white;
+   }
+   .solustions li.selected:hover {
+     background-color: #BBD8DC;
+     color: white;
+   }
+   .solustions .badge {
+     display: inline-block;
+     font-size: small;
+     color: white;
+     padding: 0.8em 0.7em 0 0.7em;
+     background-color:#405061;
+     line-height: 1em;
+     position: relative;
+     left: -1px;
+     top: -4px;
+     height: 1.8em;
+     margin-right: .8em;
+     border-radius: 4px 0 0 4px;
+   }
+   .solustions .question_cont {
+     display: inline-block;
+     font-size: small;
+     color: white;
+     padding: 0.8em 0.7em 0 0.7em;
+     background-color:#7d848b;
+     line-height: 1em;
+     position: relative;
+     left: -1px;
+     top: -4px;
+     height: 1.8em;
+     margin-right: .8em;
+     border-radius: 4px 0 0 4px;
+     width: 15em;
+   }
+   
+   button {
+     background-color: #eee;
+     border: none;
+     padding: 5px 10px;
+     border-radius: 4px;
+     cursor: pointer;
+     cursor: hand;
+     font-family: Arial;
+   }
+   
+   button:hover {
+     background-color: #cfd8dc;
+   }
+   
+   button.delete {
+     position: relative;    
+     border: white;
+     background-color: white;
+     color: black;
+     border: 2px solid rgb(76, 116, 175); /* Blue */
+     left: -1px;
+     top: -1px;
+     height: 1.8em;
+     margin-right: .8em;
+     border-radius: 4px 0 0 4px;
+   }
+ 
+ 
+   table, th, td 
+ {
+     margin: 5px 0;
+     border: solid 1px #333;
+     padding: 4px 4px;
+     font: 15px Verdana;
+ }
+ th {
+     font-weight:bold;
+ }.search-box {
+     padding: 8px;
+   }
+ 
+   .search-box input {
+     width: 188px;
+     margin-bottom: 8px;
+     display: block;
+   }
+ 
+   .search-box button {
+     width: 90px;
+   }
+ 
+   .search-button {
+     margin-right: 8px;
+   }
+ 
