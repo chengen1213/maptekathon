@@ -29,7 +29,7 @@ public class DataController {
     @Autowired
     private DataService dataService;
 
-    @PostMapping("/uploadFile")
+    @PostMapping("/data")
     public UploadFileResponse uploadDataset(@RequestParam("file") MultipartFile file) {
         String fileName = fileStorageService.storeFile(file);
         String contentType = file.getContentType();
@@ -46,7 +46,7 @@ public class DataController {
         return new UploadFileResponse(data.getId(), fileName, contentType, file.getSize());
     }
 
-    @PostMapping("/dataset/{id}")
+    @PutMapping("/data/{id}")
     public UploadFileResponse uploadAnswer(@PathVariable Long id, @RequestParam("file") MultipartFile file) {
         String fileName = fileStorageService.storeFile(file);
         String contentType = file.getContentType();

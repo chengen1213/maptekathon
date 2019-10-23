@@ -98,20 +98,22 @@ class ProcessProfiler:
 parser = argparse.ArgumentParser()
 parser.add_argument('language', help='language')
 parser.add_argument('program', help='program file name')
-parser.add_argument('fileName', help='input file name')
+parser.add_argument('input', help='input file name')
+parser.add_argument('answer', help='answer file name')
 
 args = parser.parse_args()
 
 language = args.language
 program = args.program
-fileName = args.fileName
+input = args.input
+answer = args.answer
 
 if language == 'java':
-    p = ProcessProfiler([language, program, fileName])
+    p = ProcessProfiler([language, program, input, answer])
 elif language == 'cpp':
-    p = ProcessProfiler([program, fileName])
+    p = ProcessProfiler([program, input, answer])
 elif language == 'cs':
-    p = ProcessProfiler([program, fileName])
+    p = ProcessProfiler([program, input, answer])
 
 p.run()
 if p.errors:

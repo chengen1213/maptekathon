@@ -3,6 +3,7 @@ package application.controller;
 import application.dto.CommonResponse;
 import application.dto.ProblemDto;
 import application.exception.DataNotFoundException;
+import application.exception.GeneralException;
 import application.model.Data;
 import application.model.Problem;
 import application.service.DataService;
@@ -49,6 +50,8 @@ public class ProblemController {
     @RequestMapping(value = "/problems/{id}", method = RequestMethod.PUT)
     ResponseEntity<?> updateProblemById(@PathVariable Long id, @RequestBody ProblemDto problemDto) {
         Problem problem = problemService.findProblemById(id);
+        if (problem == null)
+            throw new GeneralException("Question not found!");
         setProblemContent(problem, problemDto);
         problemService.addProblem(problem);
         return ResponseEntity.ok(problem);
