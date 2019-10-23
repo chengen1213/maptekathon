@@ -3,6 +3,7 @@ import subprocess
 import psutil
 import time
 from subprocess import Popen
+import filecmp
 
 class ProcessProfiler:
   def __init__(self,command):
@@ -109,21 +110,23 @@ input = args.input
 answer = args.answer
 
 if language == 'java':
-    p = ProcessProfiler([language, program, input, answer])
+    p = ProcessProfiler([language, program, input])
 elif language == 'cpp':
-    p = ProcessProfiler([program, input, answer])
+    p = ProcessProfiler([program, input])
 elif language == 'cs':
-    p = ProcessProfiler([program, input, answer])
+    p = ProcessProfiler([program, input])
 
 p.run()
+
 if p.errors:
     success = False;
     message = p.errors;
     print(success, message)
 else:
     success = True;
+    result = filecmp.cmp("output.txt", answer)
     message = p.output;
-    print(success, p.max_vms_memory, p.max_rss_memory,p.t1 - p.t0,  message)
+    print(success, result, p.max_vms_memory, p.max_rss_memory,p.t1 - p.t0,  message)
 
 # subprocess.call("java Solution", shell=True)
 # out=subprocess.call(["java",'Solution'],stdout=out,stderr=err)
