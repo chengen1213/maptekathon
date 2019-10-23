@@ -100,7 +100,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('language', help='language')
 parser.add_argument('program', help='program file name')
 parser.add_argument('input', help='input file name')
-parser.add_argument('answer', help='answer file name')
+parser.add_argument('answer', default = None, help='answer file name')
 
 args = parser.parse_args()
 
@@ -124,7 +124,10 @@ if p.errors:
     print(success, message)
 else:
     success = True;
-    result = filecmp.cmp("output.txt", answer)
+    if answer != None:
+        result = filecmp.cmp("output.txt", answer)
+    else:
+        result = True
     message = p.output;
     print(success, result, p.max_vms_memory, p.max_rss_memory,p.t1 - p.t0,  message)
 

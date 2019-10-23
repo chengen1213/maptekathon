@@ -64,6 +64,8 @@ public class SolutionController {
         solution.setProblem(problem);
         solution.setLanguage(solutionDto.getLanguage());
         solution.setCode(solutionDto.getCode());
+        solution.setFailedPublic(new ArrayList<>());
+        solution.setFailedPrivate(new ArrayList<>());
         codeExecutionService.execute(solution);
         solutionService.addSolution(solution);
         return solution;

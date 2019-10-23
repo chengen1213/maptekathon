@@ -52,12 +52,12 @@ public class CodeExecutionServiceImpl implements CodeExecutionService {
             for (Data data : publicDataset) {
                 copyFile(targetLocation, dirPath, data.getFileName());
                 if (data.getAnswerFileName() != null)
-                    copyFile(targetLocation, dirPath, data.getFileName());
+                    copyFile(targetLocation, dirPath, data.getAnswerFileName());
             }
             for (Data data : privateDataset) {
                 copyFile(targetLocation, dirPath, data.getFileName());
                 if (data.getAnswerFileName() != null)
-                    copyFile(targetLocation, dirPath, data.getFileName());
+                    copyFile(targetLocation, dirPath, data.getAnswerFileName());
             }
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -93,15 +93,19 @@ public class CodeExecutionServiceImpl implements CodeExecutionService {
             String answerFileName = data.getAnswerFileName() == null ? "" : data.getAnswerFileName();
             String[] command = {exeCommand, profilerName, ext, sourcecodeFileName, data.getFileName(), answerFileName};
             String[] info = callProfiler(command, dir);
-            solution.setPublicSpaceComplexity(solution.getSpaceComplexity() + Double.parseDouble(info[2]));
-            solution.setPublicTimeComplexity(solution.getTimeComplexity() + Double.parseDouble(info[3]));
+            if ("False".equals(info[2]))
+                solution.getFailedPublic().add(data.getId());
+            solution.setPublicSpaceComplexity(solution.getSpaceComplexity() + Double.parseDouble(info[3]));
+            solution.setPublicTimeComplexity(solution.getTimeComplexity() + Double.parseDouble(info[4]));
         }
         for (Data data : solution.getProblem().getPublicDataset()) {
             String answerFileName = data.getAnswerFileName() == null ? "" : data.getAnswerFileName();
             String[] command = {exeCommand, profilerName, ext, sourcecodeFileName, data.getFileName(), answerFileName};
             String[] info = callProfiler(command, dir);
-            solution.setSpaceComplexity(solution.getSpaceComplexity() + Double.parseDouble(info[2]));
-            solution.setTimeComplexity(solution.getTimeComplexity() + Double.parseDouble(info[3]));
+            if ("False".equals(info[2]))
+                solution.getFailedPublic().add(data.getId());
+            solution.setSpaceComplexity(solution.getSpaceComplexity() + Double.parseDouble(info[3]));
+            solution.setTimeComplexity(solution.getTimeComplexity() + Double.parseDouble(info[4]));
         }
     }
 

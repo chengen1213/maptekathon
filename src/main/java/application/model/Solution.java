@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -47,6 +49,12 @@ public class Solution implements Serializable {
     public Solution() {
 
     }
+
+    @Transient
+    private Collection<Long> failedPublic;
+
+    @Transient
+    private Collection<Long> failedPrivate;
 
 //    public Solution(){}
 //
@@ -128,6 +136,22 @@ public class Solution implements Serializable {
 
     public void setSpaceComplexity(double spaceComplexity) {
         this.spaceComplexity = spaceComplexity;
+    }
+
+    public Collection<Long> getFailedPublic() {
+        return failedPublic;
+    }
+
+    public void setFailedPublic(List<Long> failedPublic) {
+        this.failedPublic = failedPublic;
+    }
+
+    public Collection<Long> getFailedPrivate() {
+        return failedPrivate;
+    }
+
+    public void setFailedPrivate(List<Long> failedPrivate) {
+        this.failedPrivate = failedPrivate;
     }
 
     @Override
