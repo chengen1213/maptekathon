@@ -1,6 +1,7 @@
 package application.controller;
 
 import application.dto.SolutionDto;
+import application.exception.GeneralException;
 import application.model.Problem;
 import application.model.Solution;
 import application.model.SolutionKey;
@@ -31,8 +32,8 @@ public class SolutionController {
     @Autowired
     private CodeExecutionService codeExecutionService;
 
-    @GetMapping("/problems/{problemId}/solutions/{userId}")
-    public Solution submitSolution(Principal principal, @PathVariable Long problemId,  @PathVariable Long userId) {
+    @GetMapping("/problems/{problemId}/solution")
+    public Solution submitSolution(Principal principal, @PathVariable Long problemId) {
         String userName = principal.getName();
         User user = userService.findByUserEmail(userName);
         SolutionKey solutionKey = new SolutionKey(user.getId(), problemId);
@@ -55,6 +56,8 @@ public class SolutionController {
         User user = userService.findByUserEmail(userName);
         SolutionKey solutionKey = new SolutionKey(user.getId(), id);
         Problem problem = problemService.findProblemById(id);
+        if (problem.getLanguage() != null && !problem.getLanguage().equals(solutionDto.getLanguage()))
+            throw new GeneralException("Accept " + problem.getLanguage() + " only!");
         Solution solution = new Solution();
         solution.setId(solutionKey);
         solution.setUser(user);

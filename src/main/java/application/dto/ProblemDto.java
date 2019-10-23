@@ -15,6 +15,8 @@ public class ProblemDto {
     @NotEmpty
     private String description;
 
+    private String language;
+
     @NotEmpty
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date expirationDate;
@@ -39,6 +41,14 @@ public class ProblemDto {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
     }
 
     public Date getExpirationDate() {

@@ -30,7 +30,7 @@ public class DataController {
     private DataService dataService;
 
     @PostMapping("/uploadFile")
-    public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file) {
+    public UploadFileResponse uploadDataset(@RequestParam("file") MultipartFile file) {
         String fileName = fileStorageService.storeFile(file);
         String contentType = file.getContentType();
         Data data = new Data();
@@ -46,11 +46,26 @@ public class DataController {
         return new UploadFileResponse(data.getId(), fileName, contentType, file.getSize());
     }
 
+    @PostMapping("/dataset/{id}")
+    public UploadFileResponse uploadAnswer(@PathVariable Long id, @RequestParam("file") MultipartFile file) {
+        String fileName = fileStorageService.storeFile(file);
+        String contentType = file.getContentType();
+        Optional<Data> optional = dataService.findDataById(id);
+        if (optional.isPresent()) {
+            Data data = optional.get();
+            data.setAnswerFileName(fileName);
+            data.setAnswerContentType(contentType);
+            dataService.addData(data);
+        }
+
+        return new UploadFileResponse(id, fileName, contentType, file.getSize());
+    }
+
     @PostMapping("/uploadMultipleFiles")
     public List<UploadFileResponse> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) {
         return Arrays.asList(files)
                 .stream()
-                .map(file -> uploadFile(file))
+                .map(file -> uploadDataset(file))
                 .collect(Collectors.toList());
     }
 

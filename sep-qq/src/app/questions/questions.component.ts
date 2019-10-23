@@ -210,7 +210,7 @@ private temp_q1:Object={
         this.temp_q1=response;
         // this.publicDataset=response as string [];
         // this.privateDataset.push(response.id);
-        this.privateDataset.push(this.temp_q1.id);
+        // this.privateDataset.push(this.temp_q1.id);
         console.log(this.privateDataset);
        
       })

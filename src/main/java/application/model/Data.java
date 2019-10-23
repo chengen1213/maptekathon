@@ -15,6 +15,12 @@ public class Data {
     @Column
     private String contentType;
 
+    @Column
+    private String answerFileName;
+
+    @Column
+    private String answerContentType;
+
     public Data() {
 
     }
@@ -41,5 +47,21 @@ public class Data {
 
     public void setContentType(String contentType) {
         this.contentType = contentType;
+    }
+
+    public String getAnswerFileName() {
+        return answerFileName;
+    }
+
+    public void setAnswerFileName(String answerFileName) {
+        this.answerFileName = answerFileName;
+    }
+
+    public String getAnswerContentType() {
+        return answerContentType;
+    }
+
+    public void setAnswerContentType(String answerContentType) {
+        this.answerContentType = answerContentType;
     }
 }

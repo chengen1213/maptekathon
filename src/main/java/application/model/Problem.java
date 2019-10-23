@@ -22,6 +22,9 @@ public class Problem {
     private String description;
 
     @Column
+    private String language;
+
+    @Column
     @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate;
 
@@ -77,6 +80,14 @@ public class Problem {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
     }
 
     public Date getCreationDate() {

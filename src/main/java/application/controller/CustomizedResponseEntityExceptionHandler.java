@@ -4,6 +4,7 @@ import application.dto.ErrorDetails;
 import application.exception.CanNotCompileException;
 import application.exception.DataNotFoundException;
 import application.exception.ExecutionErrorException;
+import application.exception.GeneralException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,14 +32,21 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
     }
 
     @ExceptionHandler(CanNotCompileException.class)
-    public final ResponseEntity<ErrorDetails> handleDataNotFoundException(CanNotCompileException ex, WebRequest request) {
+    public final ResponseEntity<ErrorDetails> handleCanNotCompileException(CanNotCompileException ex, WebRequest request) {
         ErrorDetails errorDetails = new ErrorDetails(new Date(), ex.getMessage(),
                 request.getDescription(false));
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(ExecutionErrorException.class)
-    public final ResponseEntity<ErrorDetails> handleDataNotFoundException(ExecutionErrorException ex, WebRequest request) {
+    public final ResponseEntity<ErrorDetails> ExecutionErrorException(ExecutionErrorException ex, WebRequest request) {
+        ErrorDetails errorDetails = new ErrorDetails(new Date(), ex.getMessage(),
+                request.getDescription(false));
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(GeneralException.class)
+    public final ResponseEntity<ErrorDetails> GeneralException(ExecutionErrorException ex, WebRequest request) {
         ErrorDetails errorDetails = new ErrorDetails(new Date(), ex.getMessage(),
                 request.getDescription(false));
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);

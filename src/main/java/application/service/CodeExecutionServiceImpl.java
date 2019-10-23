@@ -24,7 +24,7 @@ public class CodeExecutionServiceImpl implements CodeExecutionService {
     private FileStorageService fileStorageService;
 
     @Override
-    public void execute(Solution solution) throws ExecutionErrorException{
+    public void execute(Solution solution) throws ExecutionErrorException {
         Problem problem = solution.getProblem();
         Collection<Data> publicDataset = problem.getPublicDataset();
         Collection<Data> privateDataset = problem.getPrivateDataset();
@@ -49,12 +49,16 @@ public class CodeExecutionServiceImpl implements CodeExecutionService {
             writer.write(code);
             writer.close();
 
-            for (Data data : publicDataset)
+            for (Data data : publicDataset) {
                 copyFile(targetLocation, dirPath, data.getFileName());
-
-            for (Data data : privateDataset)
+                if (data.getAnswerFileName() != null)
+                    copyFile(targetLocation, dirPath, data.getFileName());
+            }
+            for (Data data : privateDataset) {
                 copyFile(targetLocation, dirPath, data.getFileName());
-
+                if (data.getAnswerFileName() != null)
+                    copyFile(targetLocation, dirPath, data.getFileName());
+            }
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -78,7 +82,7 @@ public class CodeExecutionServiceImpl implements CodeExecutionService {
             executeCommand(javac, dir);
         } else if ("cpp".equals(ext)) {
             //gcc –o name name.cpp
-            String[] gcc = {"g++", "-o",sourcecodeFileName, sourcecodeFileName + "." + ext};
+            String[] gcc = {"g++", "-o", sourcecodeFileName, sourcecodeFileName + "." + ext};
             executeCommand(gcc, dir);
         } else if ("cs".equals(ext)) {
             //csc name.cs
@@ -86,13 +90,15 @@ public class CodeExecutionServiceImpl implements CodeExecutionService {
             executeCommand(csc, dir);
         }
         for (Data data : solution.getProblem().getPublicDataset()) {
-            String[] command = {exeCommand, profilerName, ext, sourcecodeFileName, data.getFileName()};
+            String answerFileName = data.getAnswerFileName() == null ? "" : data.getAnswerFileName();
+            String[] command = {exeCommand, profilerName, ext, sourcecodeFileName, data.getFileName(), answerFileName};
             String[] info = callProfiler(command, dir);
             solution.setPublicSpaceComplexity(solution.getSpaceComplexity() + Double.parseDouble(info[2]));
             solution.setPublicTimeComplexity(solution.getTimeComplexity() + Double.parseDouble(info[3]));
         }
-        for (Data data : solution.getProblem().getPrivateDataset()) {
-            String[] command = {exeCommand, profilerName, ext, sourcecodeFileName, data.getFileName()};
+        for (Data data : solution.getProblem().getPublicDataset()) {
+            String answerFileName = data.getAnswerFileName() == null ? "" : data.getAnswerFileName();
+            String[] command = {exeCommand, profilerName, ext, sourcecodeFileName, data.getFileName(), answerFileName};
             String[] info = callProfiler(command, dir);
             solution.setSpaceComplexity(solution.getSpaceComplexity() + Double.parseDouble(info[2]));
             solution.setTimeComplexity(solution.getTimeComplexity() + Double.parseDouble(info[3]));

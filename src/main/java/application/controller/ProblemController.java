@@ -63,6 +63,7 @@ public class ProblemController {
     private void setProblemContent(Problem problem, ProblemDto problemDto) {
         problem.setTitle(problemDto.getTitle());
         problem.setDescription(problemDto.getDescription());
+        problem.setLanguage(problemDto.getLanguage());
         problem.setCreationDate(new Date());
         problem.setExpirationDate(problemDto.getExpirationDate());
         List<Data> publicDataSet = new ArrayList<>();
