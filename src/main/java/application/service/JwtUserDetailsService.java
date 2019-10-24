@@ -12,10 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @Service
 @Transactional
@@ -78,18 +75,7 @@ public class JwtUserDetailsService implements UserService {
 
     //    @Override
     public User registerNewUserAccount(UserDto accountDto) throws EmailExistsException {
-
-        if (emailExists(accountDto.getEmail())) {
-            throw new EmailExistsException
-                    ("There is an account with that email adress: " + accountDto.getEmail());
-        }
-        User user = new User();
-
-        user.setUsername(accountDto.getUserName());
-//        user.setLastName(accountDto.getLastName());
-        user.setPassword(passwordEncoder.encode(accountDto.getPassword()));
-        user.setEmail(accountDto.getEmail());
-
+        User user = initialiseUser(accountDto);
         user.setRoles(Arrays.asList(roleRepository.findByName("ROLE_USER")));
         return userRepository.save(user);
     }
@@ -112,6 +98,52 @@ public class JwtUserDetailsService implements UserService {
     public User findByUserEmail(String email) {
         User user = null;
         user = userRepository.findByEmail(email);
+        return user;
+    }
+
+    public User addAdmin(UserDto accountDto) throws EmailExistsException {
+
+        if (emailExists(accountDto.getEmail())) {
+            throw new EmailExistsException
+                    ("There is an account with that email adress: " + accountDto.getEmail());
+        }
+        User user = initialiseUser(accountDto);
+        user.setRoles(Arrays.asList(roleRepository.findByName("ROLE_EMPLOYEE")));
+        return userRepository.save(user);
+    }
+
+    private User initialiseUser(UserDto accountDto) throws EmailExistsException{
+        if (emailExists(accountDto.getEmail())) {
+            throw new EmailExistsException
+                    ("There is an account with that email adress: " + accountDto.getEmail());
+        }
+        User user = new User();
+
+        user.setUsername(accountDto.getUserName());
+        user.setPassword(passwordEncoder.encode(accountDto.getPassword()));
+        user.setEmail(accountDto.getEmail());
+        return user;
+    }
+
+    public User disable(Long id) {
+        Optional<User> optional = userRepository.findById(id);
+        User user = null;
+        if (optional.isPresent()) {
+            user = optional.get();
+            user.setRoles(Arrays.asList(roleRepository.findByName("ROLE_DISABLED_EMPLOYEE")));
+            userRepository.save(user);
+        }
+        return user;
+    }
+
+    public User enable(Long id) {
+        Optional<User> optional = userRepository.findById(id);
+        User user = null;
+        if (optional.isPresent()) {
+            user = optional.get();
+            user.setRoles(Arrays.asList(roleRepository.findByName("ROLE_EMPLOYEE")));
+            userRepository.save(user);
+        }
         return user;
     }
 }

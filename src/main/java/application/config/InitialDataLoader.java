@@ -43,6 +43,8 @@ public class InitialDataLoader implements
         List<Privilege> adminPrivileges = Arrays.asList(
                 readPrivilege, writePrivilege);
         createRoleIfNotFound("ROLE_ADMIN", adminPrivileges);
+        createRoleIfNotFound("ROLE_EMPLOYEE", adminPrivileges);
+        createRoleIfNotFound("ROLE_DISABLED_EMPLOYEE", Arrays.asList(readPrivilege));
         createRoleIfNotFound("ROLE_USER", Arrays.asList(readPrivilege));
 
         Role adminRole = roleRepository.findByName("ROLE_ADMIN");

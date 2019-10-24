@@ -4,6 +4,7 @@ import application.config.JwtTokenUtil;
 import application.dto.JwtRequest;
 import application.dto.JwtResponse;
 import application.dto.UserDto;
+import application.exception.GeneralException;
 import application.model.Role;
 import application.model.User;
 import application.service.JwtUserDetailsService;
@@ -60,5 +61,29 @@ public class JwtAuthenticationController {
         } catch (BadCredentialsException e) {
             throw new Exception("INVALID_CREDENTIALS", e);
         }
+    }
+
+    @RequestMapping(value = "/addEmployee", method = RequestMethod.POST)
+    public ResponseEntity<?> addAdmin(@Valid @RequestBody UserDto accountDto) throws EmailExistsException {
+        User user = userDetailsService.addAdmin(accountDto);
+        return ResponseEntity.ok(user);
+    }
+
+    @RequestMapping(value = "/disableEmployee/{id}", method = RequestMethod.POST)
+    public ResponseEntity<?> disableEmployee(@PathVariable Long id) throws EmailExistsException {
+        User user = userDetailsService.disable(id);
+        if (user == null) {
+            throw new GeneralException("User id " + id + " not found!");
+        }
+        return ResponseEntity.ok(user);
+    }
+
+    @RequestMapping(value = "/enableEmployee/{id}", method = RequestMethod.POST)
+    public ResponseEntity<?> enableEmployee(@PathVariable Long id) throws EmailExistsException {
+        User user = userDetailsService.enable(id);
+        if (user == null) {
+            throw new GeneralException("User id " + id + " not found!");
+        }
+        return ResponseEntity.ok(user);
     }
 }
