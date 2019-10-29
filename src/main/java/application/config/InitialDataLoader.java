@@ -81,8 +81,7 @@ public class InitialDataLoader implements
     }
 
     @Transactional
-    protected Role createRoleIfNotFound(
-            String name, Collection<Privilege> privileges) {
+    protected Role createRoleIfNotFound(String name, Collection<Privilege> privileges) {
 
         Role role = roleRepository.findByName(name);
         if (role == null) {

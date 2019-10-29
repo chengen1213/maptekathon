@@ -51,8 +51,8 @@ public class SolutionController {
 
     @PostMapping("/problems/{id}/solutions")
     public Solution submitSolution(Principal principal, @PathVariable Long id, @RequestBody SolutionDto solutionDto) {
-//        String userName = principal.getName();
-        String userName = "enawaken@gmail.com";
+        String userName = principal.getName();
+//        String userName = "enawaken@gmail.com";
         User user = userService.findByUserEmail(userName);
         SolutionKey solutionKey = new SolutionKey(user.getId(), id);
         Problem problem = problemService.findProblemById(id);

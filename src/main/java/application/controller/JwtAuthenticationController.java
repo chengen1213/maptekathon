@@ -70,7 +70,7 @@ public class JwtAuthenticationController {
     }
 
     @RequestMapping(value = "/disableEmployee/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<?> disableEmployee(@PathVariable Long id) throws EmailExistsException {
+    public ResponseEntity<?> disableEmployee(@PathVariable Long id) {
         User user = userDetailsService.disable(id);
         if (user == null) {
             throw new GeneralException("User id " + id + " not found!");
@@ -79,7 +79,7 @@ public class JwtAuthenticationController {
     }
 
     @RequestMapping(value = "/enableEmployee/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<?> enableEmployee(@PathVariable Long id) throws EmailExistsException {
+    public ResponseEntity<?> enableEmployee(@PathVariable Long id) {
         User user = userDetailsService.enable(id);
         if (user == null) {
             throw new GeneralException("User id " + id + " not found!");
