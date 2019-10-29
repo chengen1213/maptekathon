@@ -46,15 +46,18 @@ public class Solution implements Serializable {
     @Column
     private double spaceComplexity;
 
-    public Solution() {
-
-    }
+    @Column
+    private double accuracy;
 
     @Transient
     private Collection<Long> failedPublic;
 
     @Transient
     private Collection<Long> failedPrivate;
+
+    public Solution() {
+
+    }
 
 //    public Solution(){}
 //
@@ -136,6 +139,14 @@ public class Solution implements Serializable {
 
     public void setSpaceComplexity(double spaceComplexity) {
         this.spaceComplexity = spaceComplexity;
+    }
+
+    public double getAccuracy() {
+        return accuracy;
+    }
+
+    public void setAccuracy(double accuracy) {
+        this.accuracy = accuracy;
     }
 
     public Collection<Long> getFailedPublic() {

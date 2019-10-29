@@ -107,6 +107,9 @@ public class CodeExecutionServiceImpl implements CodeExecutionService {
             solution.setSpaceComplexity(solution.getSpaceComplexity() + Double.parseDouble(info[3]));
             solution.setTimeComplexity(solution.getTimeComplexity() + Double.parseDouble(info[4]));
         }
+        double privateCount = solution.getProblem().getPrivateDataset().size();
+        double failCount = solution.getFailedPrivate().size();
+        solution.setAccuracy(privateCount - failCount / privateCount);
     }
 
     private void executeCommand(String[] command, File dir) throws Exception {
