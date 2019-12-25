@@ -12,7 +12,6 @@ sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
-    flatDir { dirs 'libs' }
 }
 
 dependencies {
@@ -49,9 +48,6 @@ dependencies {
     // https://mvnrepository.com/artifact/log4j/log4j
     compile group: 'log4j', name: 'log4j', version: '1.2.17'
 
-
-    implementation name: 'sigar-1.6.4'
-
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     components {
@@ -66,16 +62,21 @@ dependencies {
     }
 }
 
-buildScan {
-
-    // always accept the terms of application.service
-    termsOfServiceUrl = 'https://gradle.com/terms-of-application.service'
-    termsOfServiceAgree = 'yes'
-
-    // always publish a build scan
-    publishAlways()
-}
+//buildScan {
+//
+//    // always accept the terms of application.service
+//    termsOfServiceUrl = 'https://gradle.com/terms-of-application.service'
+//    termsOfServiceAgree = 'yes'
+//
+//    // always publish a build scan
+//    publishAlways()
+//}
 
 bootJar {
-    mainClassName = 'application.WebApplication'
+
+//    mainClassName = 'application.WebApplication'
+    mainClassName = 'org.springframework.boot.loader.JarLauncher'
+    manifest {
+        attributes 'Start-Class': 'application.WebApplication'
+    }
 }

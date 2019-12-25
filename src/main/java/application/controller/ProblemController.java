@@ -83,7 +83,8 @@ public class ProblemController {
                 throw new DataNotFoundException("Could not find data ID = " + id);
             privateDataSet.add(data.get());
         }
-
+        if (publicDataSet.size() == 0 || privateDataSet.size() == 0)
+            throw new GeneralException("A problem requires at least a public dataset and a private dataset!");
         problem.setPublicDataset(publicDataSet);
         problem.setPrivateDataset(privateDataSet);
     }

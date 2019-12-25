@@ -93,23 +93,26 @@ public class CodeExecutionServiceImpl implements CodeExecutionService {
             String answerFileName = data.getAnswerFileName() == null ? "" : data.getAnswerFileName();
             String[] command = {exeCommand, profilerName, ext, sourcecodeFileName, data.getFileName(), answerFileName};
             String[] info = callProfiler(command, dir);
-            if ("False".equals(info[2]))
+            if ("False".equals(info[1]))
                 solution.getFailedPublic().add(data.getId());
             solution.setPublicSpaceComplexity(solution.getSpaceComplexity() + Double.parseDouble(info[3]));
             solution.setPublicTimeComplexity(solution.getTimeComplexity() + Double.parseDouble(info[4]));
         }
-        for (Data data : solution.getProblem().getPublicDataset()) {
+        for (Data data : solution.getProblem().getPrivateDataset()) {
             String answerFileName = data.getAnswerFileName() == null ? "" : data.getAnswerFileName();
             String[] command = {exeCommand, profilerName, ext, sourcecodeFileName, data.getFileName(), answerFileName};
             String[] info = callProfiler(command, dir);
-            if ("False".equals(info[2]))
-                solution.getFailedPublic().add(data.getId());
+            if ("False".equals(info[1]))
+                solution.getFailedPrivate().add(data.getId());
             solution.setSpaceComplexity(solution.getSpaceComplexity() + Double.parseDouble(info[3]));
             solution.setTimeComplexity(solution.getTimeComplexity() + Double.parseDouble(info[4]));
         }
         double privateCount = solution.getProblem().getPrivateDataset().size();
         double failCount = solution.getFailedPrivate().size();
-        solution.setAccuracy(privateCount - failCount / privateCount);
+        double accuracy = 0;
+        if (privateCount != 0)
+            accuracy = privateCount - failCount / privateCount;
+        solution.setAccuracy(accuracy);
     }
 
     private void executeCommand(String[] command, File dir) throws Exception {
@@ -134,7 +137,10 @@ public class CodeExecutionServiceImpl implements CodeExecutionService {
         message = getMessage(pr.getInputStream());
         String[] info = message.split("\\s+");
         if ("False".equals(info[0])) {
-            throw new ExecutionErrorException(info[1]);
+            String err = "";
+            for (int i = 1; i < info.length; i++)
+                err += info[i] + " ";
+            throw new ExecutionErrorException(err);
         }
         return info;
     }

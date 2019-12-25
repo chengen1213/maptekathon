@@ -15,7 +15,7 @@ public class Solution implements Serializable {
     @EmbeddedId
     SolutionKey id;
 
-    @JsonIgnore
+//    @JsonIgnore
     @ManyToOne
     @MapsId("user_id")
     @JoinColumn(name = "user_id")
